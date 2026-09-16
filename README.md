@@ -1,2 +1,3 @@
 # da
-this is my first git hub account
+this is my first git hub account.
+This repository contains my personal student portfolio website, showcasing my education, skills, projects, and academic journey
