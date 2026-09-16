@@ -21,6 +21,59 @@ section{padding:88px 0}.section-head{margin-bottom:34px}.section-label{color:var
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}.contact-item{display:flex;align-items:center;gap:15px;padding:17px;background:#fff;border:1px solid var(--border);border-radius:17px}.contact-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;background:var(--secondary);color:var(--primary);font-weight:900}.contact-item small{display:block;color:var(--muted)}.contact-item strong{font-size:.92rem}footer{padding:30px 0;border-top:1px solid var(--border);color:var(--muted);font-size:.88rem;text-align:center}
 @media(max-width:820px){.hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr}.profile-wrap{order:-1}.profile-card{max-width:340px}.skills-grid,.projects-grid{grid-template-columns:1fr}.nav-links{display:none;position:absolute;top:74px;left:0;right:0;background:#fff;border-bottom:1px solid var(--border);padding:18px 20px;flex-direction:column;gap:14px}.nav-links.open{display:flex}.menu-btn{display:block}}
 @media(max-width:520px){.container{width:calc(100% - 28px)}section{padding:65px 0}.hero{padding-top:65px}.hero h1{font-size:3.15rem}.stats{grid-template-columns:1fr}.card,.skill-card,.project{padding:22px}.direction{padding:30px 22px}.info-item{flex-direction:column;gap:2px}.info-item strong{text-align:left}}
+
+/* ================================
+   PROJECT PDF VIEWER
+   ================================= */
+.pdf-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,.72);
+  padding: 18px;
+}
+.pdf-modal.active { display: flex; align-items: center; justify-content: center; }
+.pdf-modal-box {
+  width: min(1100px, 100%);
+  height: min(92vh, 900px);
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,.3);
+  display: flex;
+  flex-direction: column;
+}
+.pdf-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #fff;
+}
+.pdf-modal-title { margin: 0; font-size: 1rem; color: #172033; }
+.pdf-modal-actions { display: flex; gap: 8px; align-items: center; }
+.pdf-modal-actions a, .pdf-close {
+  border: 0;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 700;
+  background: #eef2ff;
+  color: #3730a3;
+}
+.pdf-close { background: #172033; color: #fff; }
+.pdf-frame { flex: 1; width: 100%; border: 0; background: #f7f8fc; }
+@media (max-width: 600px) {
+  .pdf-modal { padding: 0; }
+  .pdf-modal-box { height: 100vh; border-radius: 0; }
+  .pdf-modal-title { font-size: .9rem; }
+  .pdf-modal-actions a { display: none; }
+}
+
 </style>
 </head>
 <body>
@@ -66,9 +119,9 @@ section{padding:88px 0}.section-head{margin-bottom:34px}.section-label{color:var
 
 <section id="projects"><div class="container"><div class="section-head"><div class="section-label">Projects</div><h2>Selected academic work</h2><p>Selected academic and personal work from my university journey.</p></div>
 <div class="projects-grid">
-<article class="project"><div class="project-number">01 · TECHNOLOGY</div><h3>Computer Fundamentals &amp; Database Project</h3><p>An academic project presented as a Nepal country presentation, covering information, data, and presentation skills.</p><a href="Computer_Fundamentals_Database_Project-1.pptx" target="_blank" rel="noopener">View Project →</a></article>
-<article class="project"><div class="project-number">02 · BUSINESS</div><h3>Business Discussion Project</h3><p>A business discussion project about installing ordering kiosks instead of raising menu prices, including options, recommendation, and next steps.</p><a href="Business_Discussion_Project-1.pdf" target="_blank" rel="noopener">View Project →</a></article>
-<article class="project"><div class="project-number">03 · EXPERIENCE</div><h3>Gyeongju Field Trip & Cultural Study</h3><p>A university field-trip assignment exploring Korean culture and the historical significance of the Silla Kingdom.</p><a href="Gyeongju_Field_Trip_Assignment-1.pdf" target="_blank" rel="noopener">View Assignment →</a></article>
+<article class="project"><div class="project-number">01 · TECHNOLOGY</div><h3>Computer Fundamentals &amp; Database Project</h3><p>An academic project presented as a Nepal country presentation, covering information, data, and presentation skills.</p><a href="Computer_Fundamentals_Database_Project-1.pdf" onclick="openProjectViewer('Computer_Fundamentals_Database_Project-1.pdf','Computer Fundamentals & Database Project'); return false;">View Project →</a></article>
+<article class="project"><div class="project-number">02 · BUSINESS</div><h3>Business Discussion Project</h3><p>A business discussion project about installing ordering kiosks instead of raising menu prices, including options, recommendation, and next steps.</p><a href="Business_Discussion_Project-1.pdf" onclick="openProjectViewer('Business_Discussion_Project-1.pdf','Business Discussion Project'); return false;">View Project →</a></article>
+<article class="project"><div class="project-number">03 · EXPERIENCE</div><h3>Gyeongju Field Trip & Cultural Study</h3><p>A university field-trip assignment exploring Korean culture and the historical significance of the Silla Kingdom.</p><a href="Gyeongju_Field_Trip_Assignment-1.pdf" onclick="openProjectViewer('Gyeongju_Field_Trip_Assignment-1.pdf','Gyeongju Field Trip & Cultural Study'); return false;">View Assignment →</a></article>
 <article class="project"><div class="project-number">04 · WEB</div><h3>Personal Portfolio Website</h3><p>A responsive personal website built to present my education, skills, projects, and academic journey.</p><a href="https://rayamajhiajay33-sudo.github.io/da/" target="_blank" rel="noopener">Open Current Portfolio →</a></article>
 </div></div></section>
 
@@ -89,4 +142,45 @@ b.onclick=()=>n.classList.toggle("open");
 document.querySelectorAll(".nav-links a").forEach(a=>a.onclick=()=>n.classList.remove("open"));
 document.getElementById("year").textContent=new Date().getFullYear();
 </script>
+
+<!-- PDF PROJECT VIEWER -->
+<div class="pdf-modal" id="pdfModal" role="dialog" aria-modal="true" aria-labelledby="pdfModalTitle">
+  <div class="pdf-modal-box">
+    <div class="pdf-modal-header">
+      <h3 class="pdf-modal-title" id="pdfModalTitle">Project</h3>
+      <div class="pdf-modal-actions">
+        <a id="pdfOpenNew" href="#" target="_blank" rel="noopener">Open in new tab ↗</a>
+        <button class="pdf-close" type="button" onclick="closeProjectViewer()">Close ✕</button>
+      </div>
+    </div>
+    <iframe class="pdf-frame" id="pdfFrame" title="Project PDF viewer"></iframe>
+  </div>
+</div>
+
+<script>
+function openProjectViewer(file, title) {
+  const modal = document.getElementById('pdfModal');
+  const frame = document.getElementById('pdfFrame');
+  const openNew = document.getElementById('pdfOpenNew');
+  document.getElementById('pdfModalTitle').textContent = title;
+  frame.src = file;
+  openNew.href = file;
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeProjectViewer() {
+  const modal = document.getElementById('pdfModal');
+  const frame = document.getElementById('pdfFrame');
+  modal.classList.remove('active');
+  frame.src = '';
+  document.body.style.overflow = '';
+}
+document.getElementById('pdfModal').addEventListener('click', function(e) {
+  if (e.target === this) closeProjectViewer();
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeProjectViewer();
+});
+</script>
+
 </body></html>
